@@ -1,6 +1,6 @@
-package com.epam.example.storage;
+package example.storage;
 
-import com.epam.example.storage.entity.SubscriptionEntity;
+import example.storage.entity.SubscriptionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

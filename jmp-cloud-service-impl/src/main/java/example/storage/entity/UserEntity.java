@@ -1,4 +1,4 @@
-package com.epam.example.storage.entity;
+package example.storage.entity;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -54,7 +54,6 @@ public class UserEntity extends BaseEntity {
   /**
    * User's birthday
    */
-  @NotBlank
   private LocalDate birthday;
 
   /**

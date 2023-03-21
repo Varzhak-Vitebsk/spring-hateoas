@@ -1,4 +1,4 @@
-package com.epam.example.storage.entity;
+package example.storage.entity;
 
 import java.time.Instant;
 import javax.persistence.MappedSuperclass;

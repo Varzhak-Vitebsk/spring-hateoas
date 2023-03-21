@@ -1,7 +1,7 @@
-package com.epam.example.mapper;
+package example.mapper;
 
 import com.epam.example.dto.Subscription;
-import com.epam.example.dto.SubscriptionResponseDto;
+import example.storage.entity.SubscriptionEntity;
 import java.util.List;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -10,10 +10,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring",
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
     unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface SubscriptionToSubscriptionDtoResponseMapper {
+public interface SubscriptionEntityToSubscriptionMapper {
 
-  List<SubscriptionResponseDto> map(List<Subscription> source);
+  List<Subscription> map(List<SubscriptionEntity> source);
 
-  SubscriptionResponseDto map(Subscription source);
+  Subscription map(SubscriptionEntity source);
 
 }

@@ -3,36 +3,15 @@ package com.epam.example.service;
 import com.epam.example.dto.UserRequestDto;
 import com.epam.example.dto.UserResponseDto;
 import com.epam.example.dto.UsersResponse;
-import com.epam.example.mapper.UserToUserDtoResponseMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
+public interface UserService {
 
-    private final UserStorageService storageService;
-    private final UserToUserDtoResponseMapper mapper;
+    UserResponseDto createUser(UserRequestDto requestDto);
 
-    public UserResponseDto createUser(UserRequestDto requestDto) {
-        return mapper.map(storageService.createOrUpdateUser(requestDto));
-    }
+    UserResponseDto updateUser(UserRequestDto requestDto);
+    void deleteUser(Long id);
 
-    public UserResponseDto updateUser(UserRequestDto requestDto) {
-        return mapper.map(storageService.createOrUpdateUser(requestDto));
-    }
+    UserResponseDto getUser(Long id);
 
-    public void deleteUser(Long id) {
-        storageService.deleteUser(id);
-    }
-
-    public UserResponseDto getUser(Long id) {
-        return mapper.map(storageService.getUser(id));
-    }
-
-    public UsersResponse getUsers() {
-        return UsersResponse.builder()
-            .users(mapper.map(storageService.getUsers()))
-            .build();
-    }
+    UsersResponse getUsers();
 }

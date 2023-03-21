@@ -1,5 +1,6 @@
-package com.epam.example.storage.entity;
+package example.storage.entity;
 
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,5 +43,10 @@ public class SubscriptionEntity extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @Cascade(CascadeType.ALL)
   private UserEntity user;
+
+  /**
+   * Subscription start day
+   */
+  private LocalDate startDate;
 
 }
