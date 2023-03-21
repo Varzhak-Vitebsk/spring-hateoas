@@ -27,7 +27,7 @@ spring:
       ddl-auto: none
     generate-ddl: false
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:migrations/subscription.xml
   jackson:
     default-property-inclusion: non_null

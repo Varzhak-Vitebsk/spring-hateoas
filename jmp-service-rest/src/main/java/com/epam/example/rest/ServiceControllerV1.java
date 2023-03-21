@@ -43,7 +43,7 @@ public interface ServiceControllerV1 {
         })
     })
     @PostMapping
-    ResponseEntity<SubscriptionRequestDto> createSubscription(
+    ResponseEntity<SubscriptionResponseDto> createSubscription(
         @RequestBody @Valid SubscriptionRequestDto request);
 
     @Operation(summary = "Update subscription.")
@@ -66,7 +66,7 @@ public interface ServiceControllerV1 {
         })
     })
     @PatchMapping
-    ResponseEntity<SubscriptionResponseDto> updateUser(
+    ResponseEntity<SubscriptionResponseDto> updateSubscription(
         @RequestBody @Valid SubscriptionRequestDto request);
 
     @Operation(summary = "Delete subscription.")
