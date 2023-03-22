@@ -1,6 +1,6 @@
 package com.epam.example.dto;
 
-import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -10,16 +10,16 @@ import org.springframework.validation.annotation.Validated;
 @Builder
 @Validated
 public record UserRequestDto(
-    @Parameter(name = "id", description = "User id")
+    @Schema(name = "id", description = "User id", example = "1234")
     Long id,
-    @Parameter(name = "name", description = "User name")
+    @Schema(name = "name", description = "User name", example = "John")
     @NotBlank
     String name,
-    @Parameter(name = "surname", description = "User surname")
+    @Schema(name = "surname", description = "User surname", example = "Doe")
     @NotBlank
     String surname,
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Parameter(name = "birthday", description = "User birthday, ISO format")
+    @Schema(name = "birthday", description = "User birthday", example = "2022-12-30")
     LocalDate birthday
 ) {
 

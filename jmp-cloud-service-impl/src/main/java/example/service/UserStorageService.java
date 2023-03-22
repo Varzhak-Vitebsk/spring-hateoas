@@ -8,6 +8,7 @@ import example.storage.UserRepository;
 import example.storage.entity.UserEntity;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,7 @@ public class UserStorageService {
             .name(request.name())
             .surname(request.surname())
             .birthday(request.birthday())
+            .subscriptions(Set.of())
             .build();
     }
 }

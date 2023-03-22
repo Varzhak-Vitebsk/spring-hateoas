@@ -9,7 +9,7 @@
         <constraints primaryKey="true" primaryKeyName="subscription_id_pk"/>
       </column>
       <column name="user_id" type="bigint">
-        <constraints references="user(id)" foreignKeyName="user_id_fk"/>
+        <constraints references="service_user(id)" foreignKeyName="service_user_id_fk"/>
       </column>
       <column name="start_date" type="timestamp"/>
       <column name="create_date" type="timestamp">

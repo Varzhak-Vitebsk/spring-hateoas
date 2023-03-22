@@ -21,7 +21,7 @@ import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 @Entity
-@Table(name = "user")
+@Table(name = "service_user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,8 +35,8 @@ public class UserEntity extends BaseEntity {
    */
   @NotNull
   @Id
-  @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_seq", allocationSize = 1)
-  @GeneratedValue(generator = "user_id_gen")
+  @SequenceGenerator(name = "service_user_id_gen", sequenceName = "service_user_id_seq", allocationSize = 1)
+  @GeneratedValue(generator = "service_user_id_gen")
   private Long id;
 
   /**
