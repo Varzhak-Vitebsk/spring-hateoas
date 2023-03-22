@@ -1,5 +1,8 @@
 package example.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import com.epam.example.dto.SubscriptionRequestDto;
 import com.epam.example.dto.SubscriptionResponseDto;
 import com.epam.example.dto.SubscriptionsResponse;
@@ -18,12 +21,16 @@ public class ServiceControllerV1Impl implements ServiceControllerV1 {
 
     @Override
     public ResponseEntity<SubscriptionResponseDto> createSubscription(SubscriptionRequestDto request) {
-        return new ResponseEntity<>(subscriptionService.createSubscription(request), HttpStatus.OK);
+        var response = subscriptionService.createSubscription(request);
+        response.add(linkTo(methodOn(ServiceControllerV1Impl.class).createSubscription(request)).withSelfRel());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<SubscriptionResponseDto> updateSubscription(SubscriptionRequestDto request) {
-        return new ResponseEntity<>(subscriptionService.updateSubscription(request), HttpStatus.OK);
+        var response = subscriptionService.updateSubscription(request);
+        response.add(linkTo(methodOn(ServiceControllerV1Impl.class).updateSubscription(request)).withSelfRel());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
@@ -34,11 +41,16 @@ public class ServiceControllerV1Impl implements ServiceControllerV1 {
 
     @Override
     public ResponseEntity<SubscriptionResponseDto> getSubscription(Long id) {
-        return new ResponseEntity<>(subscriptionService.getSubscription(id), HttpStatus.OK);
+        var response = subscriptionService.getSubscription(id);
+        response.add(linkTo(methodOn(ServiceControllerV1Impl.class).getSubscription(id)).withSelfRel());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<SubscriptionsResponse> getAllSubscriptions() {
-        return new ResponseEntity<>(subscriptionService.getSubscriptions(), HttpStatus.OK);
+        var response = subscriptionService.getSubscriptions();
+        response.subscriptions().forEach((sub) ->
+            sub.add(linkTo(methodOn(ServiceControllerV1Impl.class).getSubscription(sub.getId())).withSelfRel()));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

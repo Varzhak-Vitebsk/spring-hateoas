@@ -1,5 +1,8 @@
 package example.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import com.epam.example.dto.UserRequestDto;
 import com.epam.example.dto.UserResponseDto;
 import com.epam.example.dto.UsersResponse;
@@ -19,12 +22,16 @@ public class UserControllerV1Impl implements UserControllerV1 {
 
   @Override
   public ResponseEntity<UserResponseDto> createUser(UserRequestDto request) {
-    return new ResponseEntity<>(userService.createUser(request), HttpStatus.OK);
+    var response = userService.createUser(request);
+    response.add(linkTo(methodOn(UserControllerV1Impl.class).createUser(request)).withSelfRel());
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @Override
   public ResponseEntity<UserResponseDto> updateUser(UserRequestDto request) {
-    return new ResponseEntity<>(userService.updateUser(request), HttpStatus.OK);
+    var response = userService.updateUser(request);
+    response.add(linkTo(methodOn(UserControllerV1Impl.class).updateUser(request)).withSelfRel());
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @Override
@@ -35,11 +42,16 @@ public class UserControllerV1Impl implements UserControllerV1 {
 
   @Override
   public ResponseEntity<UserResponseDto> getUser(Long id) {
-    return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
+    var response = userService.getUser(id);
+    response.add(linkTo(methodOn(UserControllerV1Impl.class).getUser(id)).withSelfRel());
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @Override
   public ResponseEntity<UsersResponse> getAllUsers() {
-    return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    var response = userService.getUsers();
+    response.users().forEach((user) ->
+        user.add(linkTo(methodOn(UserControllerV1Impl.class).getUser(user.getId())).withSelfRel()));
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }
